@@ -1,11 +1,15 @@
-import React from 'react'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Body from './components/Body'
 
 const App = () => {
-	return (
-		<div>
-			<h1 className='text-3xl font-bold underline'>Hello world!</h1>
-		</div>
-	)
+	const appRouter = createBrowserRouter([
+		{
+			path: '/',
+			element: <Body />,
+		},
+	])
+
+	return <RouterProvider router={appRouter} />
 }
 
 export default App
