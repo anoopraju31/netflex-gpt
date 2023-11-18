@@ -13,6 +13,7 @@ import { checkValidateData } from '../utills/validation'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState<boolean>(true)
+	const [errorMessage, setErrorMessage] = useState<string | null>(null)
 	const nameRef = useRef<HTMLInputElement | null>(null)
 	const emailRef = useRef<HTMLInputElement | null>(null)
 	const passwordRef = useRef<HTMLInputElement | null>(null)
@@ -26,8 +27,9 @@ const AuthPage = () => {
 		const password = passwordRef.current?.value || ''
 
 		const message = checkValidateData(isSignIn, name, email, password)
+		setErrorMessage(message)
 
-		console.log(message)
+		if (message) return
 	}
 
 	return (
@@ -77,6 +79,11 @@ const AuthPage = () => {
 						placeholder='password'
 						inputRef={passwordRef}
 					/>
+
+					{/* Error Message */}
+					{errorMessage && (
+						<p className='text-sm text-red-500'> {errorMessage} </p>
+					)}
 
 					<div className='mt-2 mb-8'>
 						<button
