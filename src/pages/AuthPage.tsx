@@ -17,6 +17,8 @@ import {
 import FormField from '../components/FormField'
 import { checkValidateData } from '../utills/validation'
 import { auth } from '../utills/firebase'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../features/userSlice'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState<boolean>(true)
@@ -24,6 +26,7 @@ const AuthPage = () => {
 	const nameRef = useRef<HTMLInputElement | null>(null)
 	const emailRef = useRef<HTMLInputElement | null>(null)
 	const passwordRef = useRef<HTMLInputElement | null>(null)
+	const dispatch = useDispatch()
 
 	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,9 +43,18 @@ const AuthPage = () => {
 
 		if (isSignIn) {
 			// Sign In
-			signInWithEmailAndPassword(auth, email, password).catch((error) => {
-				setErrorMessage(error.message)
-			})
+			signInWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const user = userCredential.user
+
+					if (user) {
+						const { uid, displayName, email, photoURL } = user
+						dispatch(addUser({ uid, displayName, email, photoURL }))
+					}
+				})
+				.catch((error) => {
+					setErrorMessage(error.message)
+				})
 		} else {
 			// Sign Up
 			createUserWithEmailAndPassword(auth, email, password)
@@ -55,7 +67,11 @@ const AuthPage = () => {
 						photoURL: USER_AVATAR,
 					})
 						.then(() => {
-							console.log(auth.currentUser)
+							const user = auth.currentUser
+							if (user) {
+								const { uid, displayName, email, photoURL } = user
+								dispatch(addUser({ uid, displayName, email, photoURL }))
+							}
 						})
 						.catch((error) => {
 							setErrorMessage(error.message)
