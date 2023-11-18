@@ -1,6 +1,11 @@
+import { useState } from 'react'
 import { BG_IMG } from '../utills/constants'
 
 const AuthPage = () => {
+	const [isSignIn, setIsSignIn] = useState(true)
+
+	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
+
 	return (
 		<main className='relative'>
 			<div className='w-full h-screen'>
@@ -65,12 +70,15 @@ const AuthPage = () => {
 
 					{/* Switch between sign in and sign up page */}
 					<p className='text-sm text-zinc-400'>
-						<span>New to Netflix? </span>
+						<span>
+							{isSignIn ? 'New to Netflix? ' : 'Already registered? '}{' '}
+						</span>
 						<button
 							type='button'
 							tabIndex={0}
+							onClick={toggleAuthForm}
 							className='text-white hover:border-b hover:border-b-white'>
-							Sign up now
+							{isSignIn ? 'Sign up now' : 'Sign in now'}
 						</button>
 						.
 					</p>
