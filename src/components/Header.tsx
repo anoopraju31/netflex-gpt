@@ -1,12 +1,33 @@
 import { useNavigate } from 'react-router-dom'
 import { LOGO_IMG } from '../utills/constants'
-import { signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../utills/firebase'
-import { useAppSelector } from '../store'
+import { useAppDispatch, useAppSelector } from '../store'
+import { useEffect } from 'react'
+import { addUser, removeUser } from '../features/userSlice'
 
 const Header = () => {
 	const user = useAppSelector((state) => state.user)
 	const navigate = useNavigate()
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			const pathname = window.location.pathname
+
+			if (user) {
+				const { displayName, uid, email, photoURL } = user
+				dispatch(addUser({ displayName, uid, email, photoURL }))
+				navigate(pathname === '/' ? '/browse' : pathname)
+			} else {
+				dispatch(removeUser())
+				navigate('/')
+			}
+		})
+
+		// unsubscribe will be called when the component unmounts
+		return () => unsubscribe()
+	}, [dispatch, navigate])
 	const handleSignOut = () => {
 		signOut(auth)
 			.then(() => navigate('/'))
