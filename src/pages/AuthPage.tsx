@@ -3,11 +3,20 @@ import { BG_IMG } from '../utills/constants'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState(true)
-	const nameRef = useRef(null)
-	const emailRef = useRef(null)
-	const passwordRef = useRef(null)
+	const nameRef = useRef<HTMLInputElement | null>(null)
+	const emailRef = useRef<HTMLInputElement | null>(null)
+	const passwordRef = useRef<HTMLInputElement | null>(null)
 
 	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
+		const name = nameRef.current?.value
+		const email = emailRef.current?.value
+		const password = passwordRef.current?.value
+
+		console.log(name, password, email)
+	}
 
 	return (
 		<main className='relative'>
@@ -20,7 +29,9 @@ const AuthPage = () => {
 			</div>
 
 			<section className='absolute top-0 left-0 right-0 w-full h-screen flex justify-center sm:items-center bg-black sm:bg-black/30'>
-				<form className='w-full sm:w-96 my-20 sm:mt-0 p-6 sm:p-8 sm:rounded-lg flex flex-col bg-black/80 text-white'>
+				<form
+					onSubmit={handleSubmit}
+					className='w-full sm:w-96 my-20 sm:mt-0 p-6 sm:p-8 sm:rounded-lg flex flex-col bg-black/80 text-white'>
 					{/* Title */}
 					<h1 className='font-medium text-3xl pb-8'> Sign In </h1>
 
