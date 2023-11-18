@@ -78,7 +78,7 @@ const AuthPage = () => {
 					<div className='mt-2 mb-8'>
 						<button
 							type='submit'
-							className='w-full mb-2 px-6 py-2 font-medium bg-red-600 rounded-md'>
+							className='w-full mb-3 px-6 py-2 font-medium bg-red-600 rounded-md'>
 							{isSignIn ? SIGN_IN : SIGN_UP}
 						</button>
 
