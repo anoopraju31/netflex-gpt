@@ -2,3 +2,10 @@ export const LOGO_IMG =
 	'https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
 export const BG_IMG =
 	'https://assets.nflxext.com/ffe/siteui/vlv3/fc164b4b-f085-44ee-bb7f-ec7df8539eff/d23a1608-7d90-4da1-93d6-bae2fe60a69b/IN-en-20230814-popsignuptwoweeks-perspective_alpha_website_large.jpg'
+
+export const SIGN_IN = 'Sign In'
+export const SIGN_UP = 'Sign Up'
+export const SIGN_IN_FORM_MESSAGE = 'New to Netflix?'
+export const SIGN_UP_FORM_MESSAGE = 'Already registered?'
+export const SIGN_IN_FORM_TOGGLE_BUTTON = 'Sign up now'
+export const SIGN_UP_FORM_TOGGLE_BUTTON = 'Sign in now'

@@ -1,5 +1,13 @@
 import { useRef, useState } from 'react'
-import { BG_IMG } from '../utills/constants'
+import {
+	BG_IMG,
+	SIGN_IN,
+	SIGN_IN_FORM_MESSAGE,
+	SIGN_IN_FORM_TOGGLE_BUTTON,
+	SIGN_UP,
+	SIGN_UP_FORM_MESSAGE,
+	SIGN_UP_FORM_TOGGLE_BUTTON,
+} from '../utills/constants'
 import FormField from '../components/FormField'
 
 const AuthPage = () => {
@@ -35,7 +43,7 @@ const AuthPage = () => {
 					className='w-full sm:w-96 my-20 sm:mt-0 p-6 sm:p-8 sm:rounded-lg flex flex-col bg-black/80 text-white'>
 					{/* Title */}
 					<h1 className='font-medium text-3xl pb-8'>
-						{isSignIn ? 'Sign In' : 'Sign Up'}
+						{isSignIn ? SIGN_IN : SIGN_UP}
 					</h1>
 
 					{/* Nqme */}
@@ -71,7 +79,7 @@ const AuthPage = () => {
 						<button
 							type='submit'
 							className='w-full mb-2 px-6 py-2 font-medium bg-red-600 rounded-md'>
-							{isSignIn ? 'Sign In' : 'Sign Up'}
+							{isSignIn ? SIGN_IN : SIGN_UP}
 						</button>
 
 						<div className='flex justify-between text-xs text-zinc-400'>
@@ -91,14 +99,16 @@ const AuthPage = () => {
 					{/* Switch between sign in and sign up page */}
 					<p className='text-sm text-zinc-400'>
 						<span>
-							{isSignIn ? 'New to Netflix? ' : 'Already registered? '}
+							{isSignIn ? SIGN_IN_FORM_MESSAGE : SIGN_UP_FORM_MESSAGE}
 						</span>
 						<button
 							type='button'
 							tabIndex={0}
 							onClick={toggleAuthForm}
-							className='text-white hover:border-b hover:border-b-white'>
-							{isSignIn ? 'Sign up now' : 'Sign in now'}
+							className='ml-1 text-white hover:border-b hover:border-b-white'>
+							{isSignIn
+								? SIGN_IN_FORM_TOGGLE_BUTTON
+								: SIGN_UP_FORM_TOGGLE_BUTTON}
 						</button>
 						.
 					</p>
