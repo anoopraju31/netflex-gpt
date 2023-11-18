@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { BG_IMG } from '../utills/constants'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState(true)
+	const nameRef = useRef(null)
+	const emailRef = useRef(null)
+	const passwordRef = useRef(null)
 
 	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
 
@@ -27,6 +30,7 @@ const AuthPage = () => {
 							Name
 						</label>
 						<input
+							ref={nameRef}
 							type='text'
 							name='name'
 							placeholder='full name'
@@ -40,6 +44,7 @@ const AuthPage = () => {
 							Email
 						</label>
 						<input
+							ref={emailRef}
 							type='email'
 							name='email'
 							placeholder='email address'
@@ -53,6 +58,7 @@ const AuthPage = () => {
 							Password
 						</label>
 						<input
+							ref={passwordRef}
 							type='password'
 							name='password'
 							placeholder='password'
