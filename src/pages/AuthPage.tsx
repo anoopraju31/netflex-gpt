@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../store'
 import { useNavigate } from 'react-router-dom'
 import {
 	createUserWithEmailAndPassword,
@@ -27,7 +27,7 @@ const AuthPage = () => {
 	const nameRef = useRef<HTMLInputElement | null>(null)
 	const emailRef = useRef<HTMLInputElement | null>(null)
 	const passwordRef = useRef<HTMLInputElement | null>(null)
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
 	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
