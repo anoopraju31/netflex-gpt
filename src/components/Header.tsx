@@ -1,4 +1,4 @@
-import React from 'react'
+import { LOGO_IMG } from '../utills/constants'
 
 const Header = () => {
 	return (
@@ -6,7 +6,7 @@ const Header = () => {
 			<div className=''>
 				<img
 					className='w-28 sm:w-32 md:w-36 lg:w-44'
-					src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
+					src={LOGO_IMG}
 					alt='logo'
 				/>
 			</div>
