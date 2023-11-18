@@ -48,6 +48,19 @@ const AuthPage = () => {
 							className='w-full mb-2 px-6 py-2 font-medium bg-red-600 rounded-md'>
 							Sign In
 						</button>
+
+						<div className='flex justify-between text-xs text-zinc-400'>
+							<div className='flex items-center gap-1'>
+								<input type='checkbox' id='remember-me' />
+								<label htmlFor='remember-me'> Remember me </label>
+							</div>
+
+							<p
+								tabIndex={0}
+								className='border-b border-b-transparent hover:border-b-zinc-400'>
+								Need help?
+							</p>
+						</div>
 					</div>
 				</form>
 			</section>
