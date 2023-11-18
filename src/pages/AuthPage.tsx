@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { BG_IMG } from '../utills/constants'
 
 const AuthPage = () => {
-	const [isSignIn, setIsSignIn] = useState(true)
+	const [isSignIn, setIsSignIn] = useState<boolean>(true)
 	const nameRef = useRef<HTMLInputElement | null>(null)
 	const emailRef = useRef<HTMLInputElement | null>(null)
 	const passwordRef = useRef<HTMLInputElement | null>(null)
@@ -36,18 +36,20 @@ const AuthPage = () => {
 					<h1 className='font-medium text-3xl pb-8'> Sign In </h1>
 
 					{/* Nqme */}
-					<div className='my-2'>
-						<label htmlFor='name' className='sr-only'>
-							Name
-						</label>
-						<input
-							ref={nameRef}
-							type='text'
-							name='name'
-							placeholder='full name'
-							className='w-full px-4 py-2 bg-zinc-700 outline-none rounded-md'
-						/>
-					</div>
+					{!isSignIn && (
+						<div className='my-2'>
+							<label htmlFor='name' className='sr-only'>
+								Name
+							</label>
+							<input
+								ref={nameRef}
+								type='text'
+								name='name'
+								placeholder='full name'
+								className='w-full px-4 py-2 bg-zinc-700 outline-none rounded-md'
+							/>
+						</div>
+					)}
 
 					{/* Eamil */}
 					<div className='my-2'>
