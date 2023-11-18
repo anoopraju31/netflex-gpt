@@ -34,7 +34,9 @@ const AuthPage = () => {
 					onSubmit={handleSubmit}
 					className='w-full sm:w-96 my-20 sm:mt-0 p-6 sm:p-8 sm:rounded-lg flex flex-col bg-black/80 text-white'>
 					{/* Title */}
-					<h1 className='font-medium text-3xl pb-8'> Sign In </h1>
+					<h1 className='font-medium text-3xl pb-8'>
+						{isSignIn ? 'Sign In' : 'Sign Up'}
+					</h1>
 
 					{/* Nqme */}
 					{!isSignIn && (
@@ -48,32 +50,22 @@ const AuthPage = () => {
 					)}
 
 					{/* Eamil */}
-					<div className='my-2'>
-						<label htmlFor='email' className='sr-only'>
-							Email
-						</label>
-						<input
-							ref={emailRef}
-							type='email'
-							name='email'
-							placeholder='email address'
-							className='w-full px-4 py-2 bg-zinc-700 outline-none rounded-md'
-						/>
-					</div>
+					<FormField
+						label='Email'
+						name='email'
+						type='email'
+						placeholder='email address'
+						inputRef={emailRef}
+					/>
 
 					{/* Password */}
-					<div className='my-2'>
-						<label htmlFor='password' className='sr-only'>
-							Password
-						</label>
-						<input
-							ref={passwordRef}
-							type='password'
-							name='password'
-							placeholder='password'
-							className='w-full px-4 py-2 bg-zinc-700 outline-none rounded-md'
-						/>
-					</div>
+					<FormField
+						label='Password'
+						name='password'
+						type='password'
+						placeholder='password'
+						inputRef={passwordRef}
+					/>
 
 					<div className='mt-2 mb-8'>
 						<button
@@ -99,7 +91,7 @@ const AuthPage = () => {
 					{/* Switch between sign in and sign up page */}
 					<p className='text-sm text-zinc-400'>
 						<span>
-							{isSignIn ? 'New to Netflix? ' : 'Already registered? '}{' '}
+							{isSignIn ? 'New to Netflix? ' : 'Already registered? '}
 						</span>
 						<button
 							type='button'
