@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import { useAppDispatch } from '../store'
-import { useNavigate } from 'react-router-dom'
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
@@ -28,7 +27,6 @@ const AuthPage = () => {
 	const emailRef = useRef<HTMLInputElement | null>(null)
 	const passwordRef = useRef<HTMLInputElement | null>(null)
 	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
 
 	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,19 +43,9 @@ const AuthPage = () => {
 
 		if (isSignIn) {
 			// Sign In
-			signInWithEmailAndPassword(auth, email, password)
-				.then((userCredential) => {
-					const user = userCredential.user
-
-					if (user) {
-						const { uid, displayName, email, photoURL } = user
-						dispatch(addUser({ uid, displayName, email, photoURL }))
-						navigate('/browse')
-					}
-				})
-				.catch((error) => {
-					setErrorMessage(error.message)
-				})
+			signInWithEmailAndPassword(auth, email, password).catch((error) => {
+				setErrorMessage(error.message)
+			})
 		} else {
 			// Sign Up
 			createUserWithEmailAndPassword(auth, email, password)
@@ -71,10 +59,10 @@ const AuthPage = () => {
 					})
 						.then(() => {
 							const user = auth.currentUser
+
 							if (user) {
 								const { uid, displayName, email, photoURL } = user
 								dispatch(addUser({ uid, displayName, email, photoURL }))
-								navigate('/browse')
 							}
 						})
 						.catch((error) => {
