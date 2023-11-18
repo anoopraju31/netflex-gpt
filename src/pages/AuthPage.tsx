@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
@@ -17,7 +19,6 @@ import {
 import FormField from '../components/FormField'
 import { checkValidateData } from '../utills/validation'
 import { auth } from '../utills/firebase'
-import { useDispatch } from 'react-redux'
 import { addUser } from '../features/userSlice'
 
 const AuthPage = () => {
@@ -27,6 +28,7 @@ const AuthPage = () => {
 	const emailRef = useRef<HTMLInputElement | null>(null)
 	const passwordRef = useRef<HTMLInputElement | null>(null)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const toggleAuthForm = () => setIsSignIn((prev) => !prev)
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,6 +52,7 @@ const AuthPage = () => {
 					if (user) {
 						const { uid, displayName, email, photoURL } = user
 						dispatch(addUser({ uid, displayName, email, photoURL }))
+						navigate('/browse')
 					}
 				})
 				.catch((error) => {
@@ -71,6 +74,7 @@ const AuthPage = () => {
 							if (user) {
 								const { uid, displayName, email, photoURL } = user
 								dispatch(addUser({ uid, displayName, email, photoURL }))
+								navigate('/browse')
 							}
 						})
 						.catch((error) => {
