@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Body from './components/Body'
 import AuthPage from './pages/AuthPage'
+import BrowsePage from './pages/BrowsePage'
 import store from './store'
 
 const App = () => {
@@ -13,6 +14,10 @@ const App = () => {
 				{
 					path: '/',
 					element: <AuthPage />,
+				},
+				{
+					path: '/browse',
+					element: <BrowsePage />,
 				},
 			],
 		},
