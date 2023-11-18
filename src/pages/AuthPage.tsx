@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	updateProfile,
 } from 'firebase/auth'
 import {
 	BG_IMG,
@@ -11,6 +12,7 @@ import {
 	SIGN_UP,
 	SIGN_UP_FORM_MESSAGE,
 	SIGN_UP_FORM_TOGGLE_BUTTON,
+	USER_AVATAR,
 } from '../utills/constants'
 import FormField from '../components/FormField'
 import { checkValidateData } from '../utills/validation'
@@ -45,7 +47,19 @@ const AuthPage = () => {
 			// Sign Up
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
-					console.log(userCredential)
+					const user = userCredential.user
+
+					// Add user's name to account
+					updateProfile(user, {
+						displayName: name,
+						photoURL: USER_AVATAR,
+					})
+						.then(() => {
+							console.log(auth.currentUser)
+						})
+						.catch((error) => {
+							setErrorMessage(error.message)
+						})
 				})
 				.catch((error) => {
 					setErrorMessage(error.message)
