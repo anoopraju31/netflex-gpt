@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { BG_IMG } from '../utills/constants'
+import FormField from '../components/FormField'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState<boolean>(true)
@@ -37,18 +38,13 @@ const AuthPage = () => {
 
 					{/* Nqme */}
 					{!isSignIn && (
-						<div className='my-2'>
-							<label htmlFor='name' className='sr-only'>
-								Name
-							</label>
-							<input
-								ref={nameRef}
-								type='text'
-								name='name'
-								placeholder='full name'
-								className='w-full px-4 py-2 bg-zinc-700 outline-none rounded-md'
-							/>
-						</div>
+						<FormField
+							label='Name'
+							name='name'
+							type='text'
+							placeholder='full name'
+							inputRef={nameRef}
+						/>
 					)}
 
 					{/* Eamil */}
