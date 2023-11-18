@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { LOGO_IMG } from '../utills/constants'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../utills/firebase'
-import { useAppDispatch, useAppSelector } from '../store'
 import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../store'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { LOGO_IMG } from '../utills/constants'
+import { auth } from '../utills/firebase'
 import { addUser, removeUser } from '../features/userSlice'
 
 const Header = () => {
