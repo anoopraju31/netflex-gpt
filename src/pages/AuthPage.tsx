@@ -62,6 +62,18 @@ const AuthPage = () => {
 							</p>
 						</div>
 					</div>
+
+					{/* Switch between sign in and sign up page */}
+					<p className='text-sm text-zinc-400'>
+						<span>New to Netflix? </span>
+						<button
+							type='button'
+							tabIndex={0}
+							className='text-white hover:border-b hover:border-b-white'>
+							Sign up now
+						</button>
+						.
+					</p>
 				</form>
 			</section>
 		</main>
