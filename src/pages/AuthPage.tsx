@@ -21,6 +21,19 @@ const AuthPage = () => {
 					{/* Title */}
 					<h1 className='font-medium text-3xl pb-8'> Sign In </h1>
 
+					{/* Nqme */}
+					<div className='my-2'>
+						<label htmlFor='name' className='sr-only'>
+							Name
+						</label>
+						<input
+							type='text'
+							name='name'
+							placeholder='full name'
+							className='w-full px-4 py-2 bg-zinc-700 outline-none rounded-md'
+						/>
+					</div>
+
 					{/* Eamil */}
 					<div className='my-2'>
 						<label htmlFor='email' className='sr-only'>
@@ -51,7 +64,7 @@ const AuthPage = () => {
 						<button
 							type='submit'
 							className='w-full mb-2 px-6 py-2 font-medium bg-red-600 rounded-md'>
-							Sign In
+							{isSignIn ? 'Sign In' : 'Sign Up'}
 						</button>
 
 						<div className='flex justify-between text-xs text-zinc-400'>
