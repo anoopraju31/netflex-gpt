@@ -9,6 +9,7 @@ import {
 	SIGN_UP_FORM_TOGGLE_BUTTON,
 } from '../utills/constants'
 import FormField from '../components/FormField'
+import { checkValidateData } from '../utills/validation'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState<boolean>(true)
@@ -20,11 +21,13 @@ const AuthPage = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		const name = nameRef.current?.value
-		const email = emailRef.current?.value
-		const password = passwordRef.current?.value
+		const name = nameRef.current?.value || ''
+		const email = emailRef.current?.value || ''
+		const password = passwordRef.current?.value || ''
 
-		console.log(name, password, email)
+		const message = checkValidateData(isSignIn, name, email, password)
+
+		console.log(message)
 	}
 
 	return (
