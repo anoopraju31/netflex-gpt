@@ -1,5 +1,8 @@
 import { useRef, useState } from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from 'firebase/auth'
 import {
 	BG_IMG,
 	SIGN_IN,
@@ -33,7 +36,13 @@ const AuthPage = () => {
 
 		if (message) return
 
-		if (!isSignIn) {
+		if (isSignIn) {
+			// Sign In
+			signInWithEmailAndPassword(auth, email, password).catch((error) => {
+				setErrorMessage(error.message)
+			})
+		} else {
+			// Sign Up
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
 					console.log(userCredential)
