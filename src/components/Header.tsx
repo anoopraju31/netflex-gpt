@@ -2,8 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import { LOGO_IMG } from '../utills/constants'
 import { signOut } from 'firebase/auth'
 import { auth } from '../utills/firebase'
+import { useAppSelector } from '../store'
 
 const Header = () => {
+	const user = useAppSelector((state) => state.user)
 	const navigate = useNavigate()
 	const handleSignOut = () => {
 		signOut(auth)
@@ -20,13 +22,15 @@ const Header = () => {
 				/>
 			</div>
 
-			<div className=''>
-				<button
-					onClick={handleSignOut}
-					className='py-1 px-4 text-white bg-red-600 rounded-lg font-medium'>
-					Sign Out
-				</button>
-			</div>
+			{user && (
+				<div className=''>
+					<button
+						onClick={handleSignOut}
+						className='py-1 px-4 text-white bg-red-600 rounded-lg font-medium'>
+						Sign Out
+					</button>
+				</div>
+			)}
 		</header>
 	)
 }
