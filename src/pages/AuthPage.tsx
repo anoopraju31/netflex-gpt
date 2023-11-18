@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import {
 	BG_IMG,
 	SIGN_IN,
@@ -10,6 +11,7 @@ import {
 } from '../utills/constants'
 import FormField from '../components/FormField'
 import { checkValidateData } from '../utills/validation'
+import { auth } from '../utills/firebase'
 
 const AuthPage = () => {
 	const [isSignIn, setIsSignIn] = useState<boolean>(true)
@@ -30,6 +32,16 @@ const AuthPage = () => {
 		setErrorMessage(message)
 
 		if (message) return
+
+		if (!isSignIn) {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					console.log(userCredential)
+				})
+				.catch((error) => {
+					setErrorMessage(error.message)
+				})
+		}
 	}
 
 	return (
