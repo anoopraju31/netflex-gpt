@@ -1,3 +1,4 @@
+import { useGetMovieTrailerQuery } from '../features/movieApi'
 import {
 	IMG_CDN_URL,
 	YOUTUBE_FEATURES,
@@ -12,15 +13,20 @@ interface BackgroundVideoProps {
 const BackgroundVideo = (props: BackgroundVideoProps) => {
 	const { movieId, posterId } = props
 
+	const { data: trailer } = useGetMovieTrailerQuery(movieId)
+
+	if (!trailer) return <div></div>
+
 	return (
 		<div className='absolute sm:relative top-0 w-full'>
 			<div className='hidden sm:block'>
 				<iframe
 					className='w-full aspect-video'
-					src={YOUTUBE_VIDEO_URL('e-mLxyLz9Hk')}
+					src={YOUTUBE_VIDEO_URL(trailer?.key)}
 					title='YouTube video player'
 					allow={YOUTUBE_FEATURES}></iframe>
 			</div>
+
 			<div className='w-full sm:hidden'>
 				<img
 					className='w-full aspect-video'
