@@ -79,26 +79,20 @@ const MovieList = (props: MovieListProps) => {
 				</div>
 
 				<div className='invisible group-hover:visible'>
-					{/* previous button */}
 					<button
 						type='button'
 						disabled={isPreviousButtonDisabled}
 						onClick={scrollToPrevious}
 						className='absolute top-0 left-0 h-full w-14 flex justify-center items-center rounded-r-3xl bg-black/40 active:bg-white/40 disabled:hidden disabled:cursor-default text-4xl hover:text-6xl'>
-						<div className='p-3'>
-							<GrFormPrevious />
-						</div>
+						<GrFormPrevious />
 					</button>
 
-					{/* next button */}
 					<button
 						type='button'
 						disabled={isNextButtonDisabled}
 						onClick={scrollToNext}
 						className='absolute top-0 right-0 h-full w-12 flex justify-center items-center rounded-l-3xl bg-black/40 active:bg-white/40 disabled:hidden disabled:cursor-default text-4xl hover:text-6xl'>
-						<div className='p-3'>
-							<GrFormNext />
-						</div>
+						<GrFormNext />
 					</button>
 				</div>
 			</div>
