@@ -11,7 +11,7 @@ const SearchPage = () => {
 					alt='login background'
 				/>
 			</div>
-			<section className='relative w-full min-h-screen z-20 bg-black/50'>
+			<section className='relative w-full min-h-screen z-20 px-0 sm:px-8 bg-black/50'>
 				<GptSearch />
 			</section>
 		</div>
