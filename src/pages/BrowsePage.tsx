@@ -3,7 +3,7 @@ import SecondaryMovieContainer from '../components/SecondaryMovieContainer'
 
 const BrowsePage = () => {
 	return (
-		<main>
+		<main className='max-w-[1536px] min-h-screen mx-auto bg-black'>
 			<HeroMovieContainer />
 			<SecondaryMovieContainer />
 		</main>
