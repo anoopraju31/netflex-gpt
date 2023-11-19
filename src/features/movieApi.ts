@@ -83,9 +83,24 @@ const movieApi = createApi({
 				return trailer
 			},
 		}),
+		getPopularMovies: builder.query({
+			query: (page: number = 1) => `/popular?page=${page}`,
+			transformResponse: (res: MovieResponse) => res?.results,
+			serializeQueryArgs: ({ endpointName }) => endpointName,
+			merge: (currentCache, newItems: Movie[]) => {
+				currentCache.push(...newItems)
+			},
+			forceRefetch({ currentArg, previousArg }) {
+				return currentArg !== previousArg
+			},
+		}),
 	}),
 })
 
-export const { useGetNowPlayingMoviesQuery, useGetMovieTrailerQuery } = movieApi
+export const {
+	useGetNowPlayingMoviesQuery,
+	useGetMovieTrailerQuery,
+	useGetPopularMoviesQuery,
+} = movieApi
 
 export default movieApi
