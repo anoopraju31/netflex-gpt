@@ -22,6 +22,24 @@ interface Movie {
 	vote_count: number
 }
 
+interface VideoItem {
+	iso_639_1: string
+	iso_3166_1: string
+	name: string
+	key: string
+	site: string
+	size: number
+	type: string
+	official: boolean
+	published_at: string
+	id: string
+}
+
+interface VideoList {
+	id: number
+	results: VideoItem[]
+}
+
 interface MovieResponse {
 	dates: Dates
 	page: number
@@ -54,9 +72,20 @@ const movieApi = createApi({
 				return currentArg !== previousArg
 			},
 		}),
+		getMovieTrailer: builder.query<VideoItem, number>({
+			query: (movieId: number) => `/${movieId}/videos`,
+			transformResponse: (res: VideoList) => {
+				const filteredData = res?.results?.filter(
+					(video) => video?.type === 'Trailer',
+				)
+				const trailer = filteredData.length ? filteredData[0] : res?.results[0]
+
+				return trailer
+			},
+		}),
 	}),
 })
 
-export const { useGetNowPlayingMoviesQuery } = movieApi
+export const { useGetNowPlayingMoviesQuery, useGetMovieTrailerQuery } = movieApi
 
 export default movieApi
