@@ -18,7 +18,10 @@ const MovieList = (props: MovieListProps) => {
 				</h2>
 			</div>
 			<div className=''>
-				<MovieCard posterId={movies[0].poster_path} />
+				<MovieCard
+					posterId={movies[0].poster_path}
+					title={movies[0].original_title}
+				/>
 			</div>
 		</section>
 	)
