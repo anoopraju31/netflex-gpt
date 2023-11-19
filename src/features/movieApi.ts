@@ -83,7 +83,7 @@ const movieApi = createApi({
 				return trailer
 			},
 		}),
-		getPopularMovies: builder.query({
+		getPopularMovies: builder.query<Movie[], number | void>({
 			query: (page: number = 1) => `/popular?page=${page}`,
 			transformResponse: (res: MovieResponse) => res?.results,
 			serializeQueryArgs: ({ endpointName }) => endpointName,
@@ -94,7 +94,7 @@ const movieApi = createApi({
 				return currentArg !== previousArg
 			},
 		}),
-		getTopRatedMovies: builder.query({
+		getTopRatedMovies: builder.query<Movie[], number | void>({
 			query: (page: number = 1) => `/top_rated?page=${page}`,
 			transformResponse: (res: MovieResponse) => res?.results,
 			serializeQueryArgs: ({ endpointName }) => endpointName,
