@@ -1,6 +1,12 @@
-import React from 'react'
+import { Movie } from '../features/movieApi'
 
-const MovieList = () => {
+interface MovieListProps {
+	title: string
+	movies: Movie[] | undefined
+}
+
+const MovieList = (props: MovieListProps) => {
+	const { title, movies } = props
 	return <div>MovieList</div>
 }
 

@@ -1,19 +1,14 @@
-import {
-	useGetPopularMoviesQuery,
-	useGetTopRatedMoviesQuery,
-	useGetTrendingMoviesQuery,
-} from '../features/movieApi'
+import { useGetNowPlayingMoviesQuery } from '../features/movieApi'
+import MovieList from './MovieList'
 
 const SecondaryMovieContainer = () => {
-	const { data: popular } = useGetPopularMoviesQuery(1)
-	const { data: topRated } = useGetTopRatedMoviesQuery(1)
-	const { data: trending } = useGetTrendingMoviesQuery(1)
+	const { data: nowPlaying } = useGetNowPlayingMoviesQuery(1)
 
-	console.log('popular', popular)
-	console.log('topRated', topRated)
-	console.log('trending', trending)
-
-	return <div>SecondaryMovieContainer</div>
+	return (
+		<div>
+			<MovieList title='Now Playing' movies={nowPlaying} />
+		</div>
+	)
 }
 
 export default SecondaryMovieContainer
