@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import Body from './components/Body'
 import AuthPage from './pages/AuthPage'
 import BrowsePage from './pages/BrowsePage'
+import SearchPage from './pages/SearchPage'
 import store from './store'
 
 const App = () => {
@@ -18,6 +19,10 @@ const App = () => {
 				{
 					path: '/browse',
 					element: <BrowsePage />,
+				},
+				{
+					path: '/search',
+					element: <SearchPage />,
 				},
 			],
 		},
