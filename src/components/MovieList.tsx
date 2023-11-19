@@ -1,4 +1,5 @@
 import { Movie } from '../features/movieApi'
+import MovieCard from './MovieCard'
 
 interface MovieListProps {
 	title: string
@@ -7,6 +8,8 @@ interface MovieListProps {
 
 const MovieList = (props: MovieListProps) => {
 	const { title, movies } = props
+	if (!movies) return <div></div>
+
 	return (
 		<section className='text-white'>
 			<div className='p-4'>
@@ -14,7 +17,9 @@ const MovieList = (props: MovieListProps) => {
 					{title}
 				</h2>
 			</div>
-			<div className=''></div>
+			<div className=''>
+				<MovieCard posterId={movies[0].poster_path} />
+			</div>
 		</section>
 	)
 }
