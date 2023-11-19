@@ -51,7 +51,7 @@ interface MovieResponse {
 const movieApi = createApi({
 	reducerPath: 'movieApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://api.themoviedb.org/3/movie',
+		baseUrl: 'https://api.themoviedb.org/3',
 		prepareHeaders: (headers) => {
 			headers.set('accept', 'application/json')
 			headers.set(
@@ -62,7 +62,7 @@ const movieApi = createApi({
 	}),
 	endpoints: (builder) => ({
 		getNowPlayingMovies: builder.query<Movie[], number | void>({
-			query: (page: number = 1) => `/now_playing?page=${page}`,
+			query: (page: number = 1) => `/movie/now_playing?page=${page}`,
 			transformResponse: (res: MovieResponse) => res?.results,
 			serializeQueryArgs: ({ endpointName }) => endpointName,
 			merge: (currentCache, newItems: Movie[]) => {
@@ -73,7 +73,7 @@ const movieApi = createApi({
 			},
 		}),
 		getMovieTrailer: builder.query<VideoItem, number>({
-			query: (movieId: number) => `/${movieId}/videos`,
+			query: (movieId: number) => `/movie/${movieId}/videos`,
 			transformResponse: (res: VideoList) => {
 				const filteredData = res?.results?.filter(
 					(video) => video?.type === 'Trailer',
@@ -84,7 +84,7 @@ const movieApi = createApi({
 			},
 		}),
 		getPopularMovies: builder.query<Movie[], number | void>({
-			query: (page: number = 1) => `/popular?page=${page}`,
+			query: (page: number = 1) => `/movie/popular?page=${page}`,
 			transformResponse: (res: MovieResponse) => res?.results,
 			serializeQueryArgs: ({ endpointName }) => endpointName,
 			merge: (currentCache, newItems: Movie[]) => {
@@ -95,8 +95,22 @@ const movieApi = createApi({
 			},
 		}),
 		getTopRatedMovies: builder.query<Movie[], number | void>({
-			query: (page: number = 1) => `/top_rated?page=${page}`,
+			query: (page: number = 1) => `/movie/top_rated?page=${page}`,
 			transformResponse: (res: MovieResponse) => res?.results,
+			serializeQueryArgs: ({ endpointName }) => endpointName,
+			merge: (currentCache, newItems: Movie[]) => {
+				currentCache.push(...newItems)
+			},
+			forceRefetch({ currentArg, previousArg }) {
+				return currentArg !== previousArg
+			},
+		}),
+		getTrendingMovies: builder.query<Movie[], number | void>({
+			query: (page: number = 1) => `/trending/movie/day?page=${page}`,
+			transformResponse: (res: MovieResponse) => {
+				console.log(res)
+				return res?.results
+			},
 			serializeQueryArgs: ({ endpointName }) => endpointName,
 			merge: (currentCache, newItems: Movie[]) => {
 				currentCache.push(...newItems)
@@ -114,6 +128,7 @@ export const {
 	useGetPopularMoviesQuery,
 	useGetTopRatedMoviesQuery,
 	useLazyGetTopRatedMoviesQuery,
+	useGetTrendingMoviesQuery,
 } = movieApi
 
 export default movieApi
