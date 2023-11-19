@@ -1,3 +1,4 @@
+import GptSearch from '../components/GptSearch'
 import { BG_IMG } from '../utills/constants'
 
 const SearchPage = () => {
@@ -10,6 +11,9 @@ const SearchPage = () => {
 					alt='login background'
 				/>
 			</div>
+			<section className='relative w-full min-h-screen z-20 bg-black/50'>
+				<GptSearch />
+			</section>
 		</div>
 	)
 }
