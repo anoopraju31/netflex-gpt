@@ -19,7 +19,8 @@ const BackgroundVideo = (props: BackgroundVideoProps) => {
 
 	return (
 		<div className='absolute sm:relative top-0 w-full'>
-			<div className='hidden sm:block'>
+			{/* Screen >= 650px Youtube video player */}
+			<div className='hidden sm:block w-full'>
 				<iframe
 					className='w-full aspect-video'
 					src={YOUTUBE_VIDEO_URL(trailer?.key)}
@@ -27,6 +28,7 @@ const BackgroundVideo = (props: BackgroundVideoProps) => {
 					allow={YOUTUBE_FEATURES}></iframe>
 			</div>
 
+			{/* Screen < 650px Movie Poster*/}
 			<div className='w-full sm:hidden'>
 				<img
 					className='w-full aspect-video'

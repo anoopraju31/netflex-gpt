@@ -10,6 +10,7 @@ const HeroMovieContainer = () => {
 
 	const movie = movies[0]
 	const { id, backdrop_path } = movie
+
 	return (
 		<section className=''>
 			<VideoTitle />
