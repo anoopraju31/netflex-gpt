@@ -1,7 +1,7 @@
+import useMovieListScroll from '../hooks/useMovieListScroll'
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 import { Movie } from '../features/movieApi'
 import MovieCard from './MovieCard'
-import { useRef, useEffect, useState } from 'react'
 
 interface MovieListProps {
 	title: string
@@ -10,52 +10,15 @@ interface MovieListProps {
 
 const MovieList = (props: MovieListProps) => {
 	const { title, movies } = props
-	const [isPreviousButtonDisabled, setIsPreviousButtonDisabled] =
-		useState<boolean>(true)
-	const [isNextButtonDisabled, setIsNextButtonDisabled] =
-		useState<boolean>(false)
-	const carouselRef = useRef<HTMLInputElement | null>(null)
-
-	useEffect(() => {
-		const handleScroll = () => {
-			if (!carouselRef.current) return
-			if (
-				carouselRef.current.scrollLeft >=
-				carouselRef.current.scrollWidth - carouselRef.current.offsetWidth - 20
-			) {
-				setIsNextButtonDisabled(true)
-				return
-			}
-			if (carouselRef.current.scrollLeft <= 0) {
-				setIsPreviousButtonDisabled(true)
-				return
-			}
-			if (isPreviousButtonDisabled) setIsPreviousButtonDisabled(false)
-			if (isNextButtonDisabled) setIsNextButtonDisabled(false)
-		}
-
-		if (!carouselRef.current) return
-		const carousel = carouselRef.current
-		carousel.addEventListener('scroll', handleScroll)
-
-		return () => {
-			carousel.removeEventListener('scroll', handleScroll)
-		}
-	}, [isNextButtonDisabled, isPreviousButtonDisabled])
+	const {
+		isPreviousButtonDisabled,
+		isNextButtonDisabled,
+		scrollToPrevious,
+		scrollToNext,
+		carouselRef,
+	} = useMovieListScroll()
 
 	if (!movies) return <div></div>
-
-	const scrollToPrevious = () => {
-		if (!carouselRef.current) return
-
-		carouselRef.current.scrollLeft -= carouselRef.current.offsetWidth
-	}
-
-	const scrollToNext = () => {
-		if (!carouselRef.current) return
-
-		carouselRef.current.scrollLeft += carouselRef.current.offsetWidth
-	}
 
 	return (
 		<section className='text-white'>
