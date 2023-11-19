@@ -107,10 +107,7 @@ const movieApi = createApi({
 		}),
 		getTrendingMovies: builder.query<Movie[], number | void>({
 			query: (page: number = 1) => `/trending/movie/day?page=${page}`,
-			transformResponse: (res: MovieResponse) => {
-				console.log(res)
-				return res?.results
-			},
+			transformResponse: (res: MovieResponse) => res?.results,
 			serializeQueryArgs: ({ endpointName }) => endpointName,
 			merge: (currentCache, newItems: Movie[]) => {
 				currentCache.push(...newItems)
