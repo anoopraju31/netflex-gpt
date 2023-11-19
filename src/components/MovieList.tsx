@@ -11,11 +11,11 @@ interface MovieListProps {
 const MovieList = (props: MovieListProps) => {
 	const { title, movies } = props
 	const {
+		carouselRef,
 		isPreviousButtonDisabled,
 		isNextButtonDisabled,
 		scrollToPrevious,
 		scrollToNext,
-		carouselRef,
 	} = useMovieListScroll()
 
 	if (!movies) return <div></div>

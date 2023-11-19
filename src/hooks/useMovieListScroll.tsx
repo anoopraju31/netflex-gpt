@@ -5,34 +5,30 @@ const useMovieListScroll = () => {
 		useState<boolean>(true)
 	const [isNextButtonDisabled, setIsNextButtonDisabled] =
 		useState<boolean>(false)
-	const carouselRef = useRef<HTMLInputElement | null>(null)
+	const carouselRef = useRef<HTMLInputElement>(null)
 
-	useEffect(() => {
-		const handleScroll = () => {
-			if (!carouselRef.current) return
-			if (
-				carouselRef.current.scrollLeft >=
-				carouselRef.current.scrollWidth - carouselRef.current.offsetWidth - 20
-			) {
-				setIsNextButtonDisabled(true)
-				return
-			}
-			if (carouselRef.current.scrollLeft <= 0) {
-				setIsPreviousButtonDisabled(true)
-				return
-			}
-			if (isPreviousButtonDisabled) setIsPreviousButtonDisabled(false)
-			if (isNextButtonDisabled) setIsNextButtonDisabled(false)
-		}
+	const handleScroll = () => {
+		console.log('scrolling')
 
 		if (!carouselRef.current) return
+
+		setIsPreviousButtonDisabled(carouselRef.current.scrollLeft === 0)
+		setIsNextButtonDisabled(
+			carouselRef.current.scrollLeft >=
+				carouselRef.current.scrollWidth - carouselRef.current.offsetWidth,
+		)
+	}
+	useEffect(() => {
 		const carousel = carouselRef.current
-		carousel.addEventListener('scroll', handleScroll)
+
+		if (carousel) {
+			carousel.addEventListener('scroll', handleScroll)
+		}
 
 		return () => {
-			carousel.removeEventListener('scroll', handleScroll)
+			if (carousel) carousel.removeEventListener('scroll', handleScroll)
 		}
-	}, [isNextButtonDisabled, isPreviousButtonDisabled])
+	})
 
 	const scrollToPrevious = () => {
 		if (!carouselRef.current) return
@@ -47,11 +43,11 @@ const useMovieListScroll = () => {
 	}
 
 	return {
+		carouselRef,
 		isPreviousButtonDisabled,
 		isNextButtonDisabled,
 		scrollToPrevious,
 		scrollToNext,
-		carouselRef,
 	}
 }
 
