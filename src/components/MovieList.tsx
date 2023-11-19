@@ -28,10 +28,10 @@ const MovieList = (props: MovieListProps) => {
 				</h2>
 			</div>
 
-			<div className='relative group'>
+			<div className='relative group px-4'>
 				<div
 					ref={carouselRef}
-					className='w-full px-4 flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth transition-transform duration-300 ease-in-out'>
+					className='w-full flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth transition-transform duration-300 ease-in-out'>
 					{movies?.map((movie) => (
 						<MovieCard
 							key={movie.id}
