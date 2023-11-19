@@ -1,10 +1,15 @@
 import React from 'react'
-import { useGetPopularMoviesQuery } from '../features/movieApi'
+import {
+	useGetPopularMoviesQuery,
+	useGetTopRatedMoviesQuery,
+} from '../features/movieApi'
 
 const SecondaryMovieContainer = () => {
-	const { data } = useGetPopularMoviesQuery(1)
+	const { data: popular } = useGetPopularMoviesQuery(1)
+	const { data: topRated } = useGetTopRatedMoviesQuery(1)
 
-	console.log(data)
+	console.log('popular', popular)
+	console.log('topRated', topRated)
 
 	return <div>SecondaryMovieContainer</div>
 }

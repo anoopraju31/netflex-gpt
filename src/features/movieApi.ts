@@ -94,6 +94,17 @@ const movieApi = createApi({
 				return currentArg !== previousArg
 			},
 		}),
+		getTopRatedMovies: builder.query({
+			query: (page: number = 1) => `/top_rated?page=${page}`,
+			transformResponse: (res: MovieResponse) => res?.results,
+			serializeQueryArgs: ({ endpointName }) => endpointName,
+			merge: (currentCache, newItems: Movie[]) => {
+				currentCache.push(...newItems)
+			},
+			forceRefetch({ currentArg, previousArg }) {
+				return currentArg !== previousArg
+			},
+		}),
 	}),
 })
 
@@ -101,6 +112,7 @@ export const {
 	useGetNowPlayingMoviesQuery,
 	useGetMovieTrailerQuery,
 	useGetPopularMoviesQuery,
+	useGetTopRatedMoviesQuery,
 } = movieApi
 
 export default movieApi
