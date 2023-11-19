@@ -113,6 +113,7 @@ export const {
 	useGetMovieTrailerQuery,
 	useGetPopularMoviesQuery,
 	useGetTopRatedMoviesQuery,
+	useLazyGetTopRatedMoviesQuery,
 } = movieApi
 
 export default movieApi
