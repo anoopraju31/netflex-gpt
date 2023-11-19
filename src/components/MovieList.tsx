@@ -17,11 +17,14 @@ const MovieList = (props: MovieListProps) => {
 					{title}
 				</h2>
 			</div>
-			<div className=''>
-				<MovieCard
-					posterId={movies[0].poster_path}
-					title={movies[0].original_title}
-				/>
+			<div className='w-full px-4 flex gap-4 overflow-x-auto scrollbar-hide'>
+				{movies?.map((movie) => (
+					<MovieCard
+						key={movie.id}
+						posterId={movie.poster_path}
+						title={movie.original_title}
+					/>
+				))}
 			</div>
 		</section>
 	)
