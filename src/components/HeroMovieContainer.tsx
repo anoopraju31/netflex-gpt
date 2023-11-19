@@ -9,11 +9,11 @@ const HeroMovieContainer = () => {
 	if (!movies) return <div></div>
 
 	const movie = movies[0]
-	const { id, backdrop_path } = movie
+	const { original_title, overview, id, backdrop_path } = movie
 
 	return (
-		<section className=''>
-			<VideoTitle />
+		<section className='relative z-10'>
+			<VideoTitle title={original_title} overview={overview} />
 			<BackgroundVideo movieId={id} posterId={backdrop_path} />
 		</section>
 	)
