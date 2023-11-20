@@ -4,17 +4,12 @@ const searchSlice = createSlice({
 	name: 'search',
 	initialState: {
 		searchText: '',
-		moviesList: [],
+		moviesList: null,
 	},
 	reducers: {
-		addSearchText: (state, action) => {
-			state.searchText = action.payload
-		},
-		addMovieList: (state, action) => {
-			state.moviesList = action.payload
-		},
+		addSearchResult: (state, action) => action.payload,
 	},
 })
 
-export const { addSearchText, addMovieList } = searchSlice.actions
+export const { addSearchResult } = searchSlice.actions
 export default searchSlice.reducer
