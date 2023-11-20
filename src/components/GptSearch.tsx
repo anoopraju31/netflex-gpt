@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import openai from '../utills/openai'
 import { gptQuery } from '../utills/constants'
-import { addSearchResult } from '../features/searchSlice'
+import { addSearchText, addMoviesList } from '../features/searchSlice'
 
 const GptSearch = () => {
 	const searchRef = useRef<HTMLInputElement | null>(null)
@@ -15,6 +15,9 @@ const GptSearch = () => {
 
 		const searchText = searchRef.current.value
 
+		dispatch(addSearchText(searchText))
+		dispatch(addMoviesList([]))
+
 		const gptResults = await openai.chat.completions.create({
 			messages: [{ role: 'user', content: gptQuery(searchText) }],
 			model: 'gpt-3.5-turbo',
@@ -23,7 +26,7 @@ const GptSearch = () => {
 		if (!gptResults.choices) return
 
 		const moviesList = gptResults.choices?.[0]?.message?.content?.split(', ')
-		dispatch(addSearchResult({ searchText, moviesList }))
+		dispatch(addMoviesList(moviesList))
 
 		searchRef.current.value = ''
 	}
