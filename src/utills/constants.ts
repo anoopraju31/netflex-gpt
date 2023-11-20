@@ -14,7 +14,7 @@ export const SIGN_UP_FORM_TOGGLE_BUTTON = 'Sign in now'
 
 export const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w500'
 export const YOUTUBE_VIDEO_URL = (videoKey: string) =>
-	`https://www.youtube.com/embed/${videoKey}?playlist=${videoKey}&autoplay=1&mute=1&loop=1&controls=0&rel=0&showinfo=0&disablekb=1`
+	`https://www.youtube.com/embed/${videoKey}?playlist=${videoKey}&autoplay=1&loop=1&controls=0&rel=0&showinfo=0&disablekb=1`
 export const YOUTUBE_FEATURES =
 	'accelerometer; autoplay; loop; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 export const gptQuery = (searchText: string) =>
