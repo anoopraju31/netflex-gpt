@@ -9,26 +9,20 @@ const GptMovieSuggestions = () => {
 
 	if (!moviesList || !searchText) return <div />
 
-	if (searchText && moviesList.length === 0)
-		return (
-			<section className='p-4 md:mt-10 lg:mt-16'>
-				<h1 className='mb-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white'>
-					Search result for "{searchText}" haha
-				</h1>
-				<SkeletonGptMovieSuggestion />
-			</section>
-		)
-
 	return (
 		<section className='p-4 md:mt-10 lg:mt-16'>
 			<h1 className='mb-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white'>
 				Search result for "{searchText}"
 			</h1>
-			<div className='mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4'>
-				{moviesList?.map((movie: string) => (
-					<SearchMovieList key={movie} movie={movie} />
-				))}
-			</div>
+			{searchText && moviesList.length === 0 ? (
+				<SkeletonGptMovieSuggestion />
+			) : (
+				<div className='mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4'>
+					{moviesList?.map((movie: string) => (
+						<SearchMovieList key={movie} movie={movie} />
+					))}
+				</div>
+			)}
 		</section>
 	)
 }
