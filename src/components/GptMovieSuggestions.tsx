@@ -1,12 +1,23 @@
 import React from 'react'
 import { useAppSelector } from '../store'
 import SearchMovieList from './SearchMovieList'
+import SkeletonGptMovieSuggestion from './SkeletonGptMovieSuggestion'
 
 const GptMovieSuggestions = () => {
 	const searchText = useAppSelector((state) => state.search?.searchText)
 	const moviesList = useAppSelector((state) => state.search?.moviesList)
 
 	if (!moviesList || !searchText) return <div />
+
+	if (searchText && moviesList.length === 0)
+		return (
+			<section className='p-4 md:mt-10 lg:mt-16'>
+				<h1 className='mb-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white'>
+					Search result for "{searchText}" haha
+				</h1>
+				<SkeletonGptMovieSuggestion />
+			</section>
+		)
 
 	return (
 		<section className='p-4 md:mt-10 lg:mt-16'>
