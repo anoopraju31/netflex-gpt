@@ -4,12 +4,16 @@ import { IMG_CDN_URL } from '../utills/constants'
 interface MovieCardProps {
 	posterId: string
 	title: string
+	fixedWidth?: boolean
 }
 
 const MovieCard = (props: MovieCardProps) => {
-	const { posterId, title } = props
+	const { posterId, title, fixedWidth } = props
 	return (
-		<div className='w-36 md:w-48 relative group/card flex-shrink-0 cursor-pointer flex'>
+		<div
+			className={`relative group flex-shrink-0 cursor-pointer flex ${
+				fixedWidth && 'w-36 md:w-48 '
+			}`}>
 			{posterId ? (
 				<img
 					className='rounded-xl w-full'

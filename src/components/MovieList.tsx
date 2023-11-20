@@ -37,6 +37,7 @@ const MovieList = (props: MovieListProps) => {
 							key={movie.id}
 							posterId={movie.poster_path}
 							title={movie.original_title}
+							fixedWidth
 						/>
 					))}
 				</div>
