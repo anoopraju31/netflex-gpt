@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import openai from '../utills/openai'
+import { gptQuery } from '../utills/constants'
 
 const GptSearch = () => {
 	const searchRef = useRef<HTMLInputElement | null>(null)
@@ -11,20 +12,12 @@ const GptSearch = () => {
 
 		const searchText = searchRef.current.value
 
-		console.log(searchText)
-
 		const gptResults = await openai.chat.completions.create({
-			messages: [
-				{
-					role: 'user',
-					content:
-						'Act as a Movie Recommendation System and suggest some movies for the query : ' +
-						searchText +
-						'. only give me names of 5 movies, coma seperated like the example given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya',
-				},
-			],
+			messages: [{ role: 'user', content: gptQuery(searchText) }],
 			model: 'gpt-3.5-turbo',
 		})
+
+		if (!gptResults.choices) return
 
 		console.log(gptResults)
 

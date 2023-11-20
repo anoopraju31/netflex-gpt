@@ -17,3 +17,7 @@ export const YOUTUBE_VIDEO_URL = (videoKey: string) =>
 	`https://www.youtube.com/embed/${videoKey}?playlist=${videoKey}&autoplay=1&mute=1&loop=1&controls=0&rel=0&showinfo=0&disablekb=1`
 export const YOUTUBE_FEATURES =
 	'accelerometer; autoplay; loop; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+export const gptQuery = (searchText: string) =>
+	`Act as a Movie Recommendation System and suggest some movies for the query : ${searchText}. 
+	only give me names of 5 movies, coma seperated like the example given ahead. 
+	Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya`
