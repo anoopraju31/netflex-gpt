@@ -1,3 +1,4 @@
+import GptMovieSuggestions from '../components/GptMovieSuggestions'
 import GptSearch from '../components/GptSearch'
 import { BG_IMG } from '../utills/constants'
 
@@ -13,6 +14,7 @@ const SearchPage = () => {
 			</div>
 			<section className='relative w-full min-h-screen z-20 px-0 sm:px-8 bg-black/50'>
 				<GptSearch />
+				<GptMovieSuggestions />
 			</section>
 		</div>
 	)

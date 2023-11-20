@@ -116,6 +116,13 @@ const movieApi = createApi({
 				return currentArg !== previousArg
 			},
 		}),
+		getMovieByName: builder.query<Movie[], string | void>({
+			query: (movie: string) =>
+				`/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`,
+			transformResponse: (res: MovieResponse) => {
+				return res.results
+			},
+		}),
 	}),
 })
 
@@ -126,6 +133,7 @@ export const {
 	useGetTopRatedMoviesQuery,
 	useLazyGetTopRatedMoviesQuery,
 	useGetTrendingMoviesQuery,
+	useGetMovieByNameQuery,
 } = movieApi
 
 export default movieApi
