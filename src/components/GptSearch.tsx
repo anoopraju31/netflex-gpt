@@ -1,9 +1,10 @@
 import { useRef } from 'react'
+import openai from '../utills/openai'
 
 const GptSearch = () => {
 	const searchRef = useRef<HTMLInputElement | null>(null)
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		if (!searchRef.current?.value) return
@@ -11,6 +12,22 @@ const GptSearch = () => {
 		const searchText = searchRef.current.value
 
 		console.log(searchText)
+
+		const gptResults = await openai.chat.completions.create({
+			messages: [
+				{
+					role: 'user',
+					content:
+						'Act as a Movie Recommendation System and suggest some movies for the query : ' +
+						searchText +
+						'. only give me names of 5 movies, coma seperated like the example given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya',
+				},
+			],
+			model: 'gpt-3.5-turbo',
+		})
+
+		console.log(gptResults)
+
 		searchRef.current.value = ''
 	}
 
