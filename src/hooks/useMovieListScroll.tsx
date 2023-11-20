@@ -8,22 +8,19 @@ const useMovieListScroll = () => {
 	const carouselRef = useRef<HTMLInputElement>(null)
 
 	const handleScroll = () => {
-		console.log('scrolling')
-
 		if (!carouselRef.current) return
 
 		setIsPreviousButtonDisabled(carouselRef.current.scrollLeft === 0)
 		setIsNextButtonDisabled(
 			carouselRef.current.scrollLeft >=
-				carouselRef.current.scrollWidth - carouselRef.current.offsetWidth,
+				carouselRef.current.scrollWidth - carouselRef.current.offsetWidth - 20,
 		)
 	}
+
 	useEffect(() => {
 		const carousel = carouselRef.current
 
-		if (carousel) {
-			carousel.addEventListener('scroll', handleScroll)
-		}
+		if (carousel) carousel.addEventListener('scroll', handleScroll)
 
 		return () => {
 			if (carousel) carousel.removeEventListener('scroll', handleScroll)
