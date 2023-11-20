@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import userReducer from './features/userSlice'
+import searchReducer from './features/searchSlice'
 import movieApi from './features/movieApi'
 
 const store = configureStore({
 	reducer: {
 		user: userReducer,
+		search: searchReducer,
 		[movieApi.reducerPath]: movieApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
