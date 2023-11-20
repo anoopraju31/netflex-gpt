@@ -19,7 +19,7 @@ const GptSearch = () => {
 
 		if (!gptResults.choices) return
 
-		console.log(gptResults)
+		const movieNames = gptResults.choices?.[0]?.message?.content?.split(', ')
 
 		searchRef.current.value = ''
 	}
