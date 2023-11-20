@@ -46,16 +46,20 @@ const MovieList = (props: MovieListProps) => {
 						type='button'
 						disabled={isPreviousButtonDisabled}
 						onClick={scrollToPrevious}
+						aria-label='previous button'
 						className='absolute top-0 left-0 h-full w-14 flex justify-center items-center rounded-r-3xl bg-black/40 active:bg-white/40 disabled:hidden disabled:cursor-default text-4xl hover:text-6xl'>
 						<GrFormPrevious />
+						<span className='sr-only'> previous</span>
 					</button>
 
 					<button
 						type='button'
 						disabled={isNextButtonDisabled}
 						onClick={scrollToNext}
+						aria-label='next button'
 						className='absolute top-0 right-0 h-full w-12 flex justify-center items-center rounded-l-3xl bg-black/40 active:bg-white/40 disabled:hidden disabled:cursor-default text-4xl hover:text-6xl'>
 						<GrFormNext />
+						<span className='sr-only'> next</span>
 					</button>
 				</div>
 			</div>
