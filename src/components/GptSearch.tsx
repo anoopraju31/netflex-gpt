@@ -1,9 +1,12 @@
 import { useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import openai from '../utills/openai'
 import { gptQuery } from '../utills/constants'
+import { addSearchResult } from '../features/searchSlice'
 
 const GptSearch = () => {
 	const searchRef = useRef<HTMLInputElement | null>(null)
+	const dispatch = useDispatch()
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -19,7 +22,8 @@ const GptSearch = () => {
 
 		if (!gptResults.choices) return
 
-		const movieNames = gptResults.choices?.[0]?.message?.content?.split(', ')
+		const moviesList = gptResults.choices?.[0]?.message?.content?.split(', ')
+		dispatch(addSearchResult({ searchText, moviesList }))
 
 		searchRef.current.value = ''
 	}
