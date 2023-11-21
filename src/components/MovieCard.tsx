@@ -11,7 +11,7 @@ const MovieCard = (props: MovieCardProps) => {
 	const { posterId, title, fixedWidth } = props
 	return (
 		<div
-			className={`relative group flex-shrink-0 cursor-pointer flex ${
+			className={`relative flex-shrink-0 cursor-pointer flex ${
 				fixedWidth && 'w-36 md:w-48 '
 			}`}>
 			{posterId ? (
@@ -26,7 +26,7 @@ const MovieCard = (props: MovieCardProps) => {
 				</div>
 			)}
 
-			<div className='absolute w-full h-full group-hover/card:bg-black/40'></div>
+			<div className='absolute w-full h-full hover/card:bg-black/40'></div>
 		</div>
 	)
 }
