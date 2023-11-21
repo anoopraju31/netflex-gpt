@@ -21,7 +21,7 @@ const MovieList = (props: MovieListProps) => {
 	if (!movies) return <div></div>
 
 	return (
-		<section className='text-white'>
+		<section className='text-white mb-2'>
 			<div className='p-4'>
 				<h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold'>
 					{title}
