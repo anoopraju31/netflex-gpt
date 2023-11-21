@@ -123,6 +123,13 @@ const movieApi = createApi({
 				return res.results
 			},
 		}),
+		getMovieByGenre: builder.query<Movie[], number | void>({
+			query: (genreId: number) =>
+				`/discover/movie?&page=1&with_genres=${genreId}`,
+			transformResponse: (res: MovieResponse) => {
+				return res.results
+			},
+		}),
 	}),
 })
 
@@ -134,6 +141,7 @@ export const {
 	useLazyGetTopRatedMoviesQuery,
 	useGetTrendingMoviesQuery,
 	useGetMovieByNameQuery,
+	useGetMovieByGenreQuery,
 } = movieApi
 
 export default movieApi
